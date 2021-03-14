@@ -1,35 +1,175 @@
-<!--index.wxml-->
-<!-- /*  
-                   _     _                 __                                    
-                  | |   (_)               / _|                                   
- _ __ ___    __ _ | | __ _  _ __    __ _ | |_  _   _  _ __     __  __ _   _  ____
-| '_ ` _ \  / _` || |/ /| || '_ \  / _` ||  _|| | | || '_ \    \ \/ /| | | ||_  /
-| | | | | || (_| ||   < | || | | || (_| || |  | |_| || | | | _  >  < | |_| | / / 
-|_| |_| |_| \__,_||_|\_\|_||_| |_| \__, ||_|   \__,_||_| |_|(_)/_/\_\ \__, |/___|
-                                    __/ |                              __/ |     
-                                   |___/                              |___/      
-*/ -->
+
+<view wx:if="{{show=='success'}}">
 <view class="container">
-  <view>
-  <text>微信智能小管家</text>
+<view class="head">
+  <view class="left">
+    <image src="{{value.Weatherlogo}}" class="weather"></image>
+    <view>
+      <view class="zz-temp">{{WeatherValue.now.temperature}}°</view>
+      <view class="location">{{WeatherValue.location.name}} {{WeatherValue.now.text}}</view> 
+    </view>
   </view>
-  <view class='humdTemp-container'>
-    <image src="{{value.Humdlogo}}" class='humd-logo'></image>
-    <image src="{{value.Templogo}}" class='temp-logo'></image>
-  </view>
-  <view>
-    <text class='humd-motto'>湿度：{{value.HumdValue}}%</text>
-    <text>温度：{{value.TempValue}}°</text>
-  </view>
+  <view class="right">
+    <navigator url="/pages/yiqing/yiqing">
+    <view class="right-header">
+      全国疫情数据(含港澳台)
+    </view>
+    <view class="right-body">
+      <view class="right-body1">
+        境外输入
+        <view class="right-body1-num1">{{value.input}}</view>
+      </view>
+      <view class="right-body1">
+        无症状者
+        <view class="right-body1-num2">{{value.noSymptom}}</view>
+      </view>
+      <view class="right-body1">
+        现有确诊
+        <view class="right-body1-num3">{{value.appconfirm-value.dead-value.heal}}</view>
+      </view>
+      
+    </view>
+    <view class="right-body">
+      <view class="right-body1">
+        累计确诊
+        <view class="right-body1-num4">{{value.appconfirm}}</view>
+      </view>
+      <view class="right-body1">
+        累计死亡
+        <view class="right-body1-num5">{{value.dead}}</view>
+      </view>
+      <view class="right-body1">
+        累计治愈
+        <view class="right-body1-num6">{{value.heal}}</view>
+      </view>
+      
+    </view>
+  </navigator>
+  </view> 
+
+ 
+</view> 
+  
+  <view class="header">
+    <navigator class='humd' url="/pages/echarts/echarts?type=outcome">
+    <view>
+      <image src="{{value.Templogo}}" class='temp-logo'></image>
+      <text>温度：{{value.TempValue}}°</text>
+     
+    </view>
+    </navigator>
+    <navigator class='temp' url="/pages/echarts/echarts?type=income">
+      <view>
+        <image src="{{value.Humdlogo}}" class='temp-logo'></image>
+     <text>湿度：{{value.HumdValue}}%</text>
+    </view>
+    </navigator>
+  </view>  
+ 
+  <view class="header">
+    <navigator  class='water' url="/pages/echarts/echarts?type=turang">
+    <view >
+      <image src="{{value.Plantlogo}}" class='temp-logo'></image>
+        <text>土壤：{{value.PlantValue}}</text>
+    </view>
+    </navigator>
+    <navigator class="air" url="/pages/echarts/echarts?type=air">
+    <view >
+      <image src="{{value.Airlogo}}" class='temp-logo'></image>
+        <text>空气：{{value.AirValue}}</text>
+    </view>
+    </navigator>
+  </view>  
+  <view class="header">
+    <navigator  class='water' url="/pages/echarts/echarts?type=shui">
+    <view>
+      <image src="{{value.Waterlogo}}" class='temp-logo'></image>
+      <text>水位:{{value.WaterValue}}mm</text> 
+    </view>
+    </navigator>
+    
+  </view> 
+<scroll-view class="major" scroll-x>
+<view class="led-control">
   <view class='led-container'>
     <image src="{{LEDValue[0].LEDlogo}}" class='led-logo'></image>
+     <button class="led-button" type="defaule" size="mini" bindtap="LedControl">{{LEDValue[0].ButtonValue}}</button>
+  </view>
+  <view class='led-container'>
+    <image src="{{LED2Value[0].LEDlogo}}" class='led-logo'></image>
+     <button class="led-button" type="defaule" size="mini" bindtap="LedControl2">{{LED2Value[0].ButtonValue}}</button>
+  </view>
+   <view class='led-container'>
+    <image src="{{LED3Value[0].LEDlogo}}" class='led-logo'></image>
+     <button class="led-button" type="defaule" size="mini" bindtap="LedControl3">{{LED3Value[0].ButtonValue}}</button>
   </view>
 
-  <view>
-    <button type="defaule" size="mini" bindtap="LedControl">{{LEDValue[0].ButtonValue}}</button>
+ <view class='led-container'>
+    <image src="{{LED4Value[0].LEDlogo}}" class='led-logo'></image>
+     <button class="led-button" type="defaule" size="mini" bindtap="LedControl4">{{LED4Value[0].ButtonValue}}</button>
   </view>
-  <view>
-    <image src='./../images/devil.png' class='logo'></image>
+  <view class='led-container'>
+    <image src="{{LED5Value[0].LEDlogo}}" class='led-logo'></image>
+     <button class="led-button" type="defaule" size="mini" bindtap="LedControl5">{{LED5Value[0].ButtonValue}}</button>
   </view>
+  <view class='led-container'>
+    <image src="{{PlantValue[0].Plantlogo}}" class='led-logo'></image>
+     <button class="led-button" type="defaule" size="mini" bindtap="PlantControl">{{PlantValue[0].ButtonValue}}</button>
+  </view>
+</view>
+</scroll-view>
 
+</view>
+</view>
+<view wx:else>
+  <view class="container">
+  <view class="head">
+  <view class="left">
+    <image src="{{value.Weatherlogo}}" class="weather"></image>
+    <view>
+      <view class="zz-temp">{{WeatherValue.now.temperature}}°</view>
+      <view class="location">{{WeatherValue.location.name}} {{WeatherValue.now.text}}</view> 
+    </view>
+  </view>
+  <view class="right">
+    <navigator url="/pages/yiqing/yiqing">
+    <view class="right-header">
+      全国疫情数据(含港澳台)
+    </view>
+    <view class="right-body">
+      <view class="right-body1">
+        境外输入
+        <view class="right-body1-num1">{{value.input}}</view>
+      </view>
+      <view class="right-body1">
+        无症状者
+        <view class="right-body1-num2">{{value.noSymptom}}</view>
+      </view>
+      <view class="right-body1">
+        现有确诊
+        <view class="right-body1-num3">{{value.appconfirm-value.dead-value.heal}}</view>
+      </view>
+      
+    </view>
+    <view class="right-body">
+      <view class="right-body1">
+        累计确诊
+        <view class="right-body1-num4">{{value.appconfirm}}</view>
+      </view>
+      <view class="right-body1">
+        累计死亡
+        <view class="right-body1-num5">{{value.dead}}</view>
+      </view>
+      <view class="right-body1">
+        累计治愈
+        <view class="right-body1-num6">{{value.heal}}</view>
+      </view>
+      
+    </view>
+  </navigator>
+  </view> 
+
+</view>
+<image style="width: 900rpx; height:900rpx;" mode="{{item.mode}}" src="{{'./../images/had6.png'}}"></image>
+</view> 
 </view>

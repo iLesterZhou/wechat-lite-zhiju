@@ -1,0 +1,20 @@
+<!--pages/login/login.wxml-->
+<view>
+  <view class='pic'>
+    <image style="width: 300rpx; height: 300rpx;" mode="{{item.mode}}" src="{{'./../images/had6.png'}}"></image>
+  </view>
+  <view class='maint'>
+    <form bindsubmit="formSubmit">
+      <view class="center">
+        <input name="oldpwd" placeholder='用户名' class="introduce" />
+      </view>
+      <view class="center">
+        <input password='true' name="newpwd" placeholder='密码' class="introduce" />
+      </view>
+      <view class='btnw'>
+        <!-- <button class='btn' type='primary' bindtap="toenroll">注册</button> -->
+        <button type='primary' form-type="submit" class='btn' >登录</button>
+      </view>
+    </form>
+  </view>
+</view>

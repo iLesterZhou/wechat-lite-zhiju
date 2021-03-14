@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "ec-canvas":"../../ec-canvas/ec-canvas"
+  },
+  "navigationBarTitleText": "全国疫情统计",
+  "enablePullDownRefresh": false,
+  "disableScroll": true
+}

@@ -1,0 +1,20 @@
+/* .my-chart{
+  width: 750rpx;
+  height: 400rpx;
+} */
+/* ec-canvax{
+  width: 100%;
+  height: 100%;
+}
+.wrap{
+  display: flex;
+  justify-content: space-evenly;
+  padding:30rpx;
+}
+.btn{
+  font-size: 20px;
+}
+.on{
+  color:#19CAAD;
+  border-bottom:1px solid #19CAAD;
+} */
