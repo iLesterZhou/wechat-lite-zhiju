@@ -51,7 +51,7 @@ Page({
         shui:getApp().globalData.shuiwei
       }
     })
-    that.init(getApp().globalData.shidu)
+    that.init(getApp().globalData.wendu)
   },
   init(optionData){
     //手动初始化

@@ -343,7 +343,7 @@ Page({
         app.globalData.turang.push(payload_string)
       }
       if (topic == that.data.topic.WaterTopic) {
-        if(payload_string<=2){
+        if(payload_string<=0){
           // console.log(payload_string);
           wx.showToast({
             title: '水位低',
