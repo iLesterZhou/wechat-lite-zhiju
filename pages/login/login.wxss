@@ -16,6 +16,11 @@ page {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  width: 90%;
+  margin: auto;
+  /* margin-top: 10px; */
+  background-color: #fff;
+  border-radius: 15px;
 }
 
 .maint > form {
@@ -26,6 +31,7 @@ page {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .btn {

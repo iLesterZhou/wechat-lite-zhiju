@@ -55,39 +55,50 @@
     <view>
       <image src="{{value.Templogo}}" class='temp-logo'></image>
       <text>温度：{{value.TempValue}}°</text>
-     
+      <view class="device">{{value.Dev2Value}}</view>
     </view>
     </navigator>
     <navigator class='temp' url="/pages/echarts/echarts?type=income">
       <view>
         <image src="{{value.Humdlogo}}" class='temp-logo'></image>
-     <text>湿度：{{value.HumdValue}}%</text>
+        <text>湿度：{{value.HumdValue}}%</text>
+        <view class="device">{{value.Dev2Value}}</view>
     </view>
     </navigator>
   </view>  
  
   <view class="header">
-    <navigator  class='water' url="/pages/echarts/echarts?type=turang">
-    <view >
-      <image src="{{value.Plantlogo}}" class='temp-logo'></image>
-        <text>土壤：{{value.PlantValue}}</text>
-    </view>
-    </navigator>
     <navigator class="air" url="/pages/echarts/echarts?type=air">
     <view >
       <image src="{{value.Airlogo}}" class='temp-logo'></image>
         <text>空气：{{value.AirValue}}</text>
+        <view class="device">{{value.Dev2Value}}</view>
     </view>
     </navigator>
+    <navigator  class='plant' url="/pages/echarts/echarts?type=turang">
+    <view >
+      <image src="{{value.Plantlogo}}" class='temp-logo'></image>
+        <text>土壤：{{value.PlantValue}}</text>
+        <view class="device">{{value.Dev3Value}}</view>
+    </view>
+    </navigator>
+   
   </view>  
   <view class="header">
     <navigator  class='water' url="/pages/echarts/echarts?type=shui">
     <view>
       <image src="{{value.Waterlogo}}" class='temp-logo'></image>
-      <text>水位:{{value.WaterValue}}mm</text> 
+      <text>水位：{{value.WaterValue}}</text> 
+      <view class="device">{{value.DevValue}}</view>
     </view>
     </navigator>
-    
+    <navigator  class='light' url="/pages/echarts/echarts?type=light">
+    <view>
+      <image src="{{value.LightLogo}}" class='temp-logo'></image>
+      <text>光照：{{value.LightValue}}</text> 
+      <view class="device">{{value.DevValue}}</view>
+    </view>
+    </navigator>
   </view> 
 <scroll-view class="major" scroll-x>
 <view class="led-control">
@@ -170,6 +181,14 @@
   </view> 
 
 </view>
-<image style="width: 900rpx; height:900rpx;" mode="{{item.mode}}" src="{{'./../images/had6.png'}}"></image>
+<view class="nologin">
+  <view class="backImg">
+    <image style="margin-left:20px;" mode="{{item.mode}}" src="{{'./../images/back.png'}}"></image>
+  </view>
+  <view class="backText">
+    登陆，解锁更多功能!
+  </view>
+</view>
 </view> 
+  
 </view>

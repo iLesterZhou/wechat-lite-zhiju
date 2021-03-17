@@ -4,6 +4,8 @@
   <view class="btn {{type=='turang' ? 'on' : ''}}" data-type="turang" bindtap="changeType">土壤</view>
   <view class="btn {{type=='air' ? 'on' : ''}}" data-type="air" bindtap="changeType">空气</view>
   <view class="btn {{type=='shui' ? 'on' : ''}}" data-type="shui" bindtap="changeType">水位</view>
+  <view class="btn {{type=='light' ? 'on' : ''}}" data-type="light" bindtap="changeType">光照</view>
+
 
 </view>
 <view class="my-chart">

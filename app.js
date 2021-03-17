@@ -26,7 +26,8 @@ App({
     shidu:[],
     turang:[],
     kongqi:[],
-    shuiwei:[]
+    shuiwei:[],
+    light:[]
   },
   randomString: function(len){
     len = len || 32;

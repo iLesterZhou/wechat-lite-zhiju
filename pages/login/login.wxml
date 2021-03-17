@@ -1,9 +1,10 @@
 <!--pages/login/login.wxml-->
 <view>
   <view class='pic'>
-    <image style="width: 300rpx; height: 300rpx;" mode="{{item.mode}}" src="{{'./../images/had6.png'}}"></image>
-  </view>
+      <image style="width: 300rpx; height: 300rpx;" mode="{{item.mode}}" src="{{'./../images/had6.png'}}"></image>
+    </view>
   <view class='maint'>
+    
     <form bindsubmit="formSubmit">
       <view class="center">
         <input name="oldpwd" placeholder='用户名' class="introduce" />

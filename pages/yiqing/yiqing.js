@@ -58,7 +58,7 @@ Page({
   },
 })
 function getOption(data){
-  console.log(data.chinaTotal.total.heal);
+  // console.log(data.chinaTotal.total.heal);
   return {
     // legend: {
     //     top: 'bottom'

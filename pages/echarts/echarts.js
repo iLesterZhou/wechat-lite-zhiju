@@ -11,7 +11,8 @@ Page({
       outcome:[],
       turang:[],
       air:[],
-      shui:[]
+      shui:[],
+      light:[]
     }
   },
 
@@ -48,7 +49,8 @@ Page({
         outcome:getApp().globalData.wendu,
         turang:getApp().globalData.turang,
         air:getApp().globalData.kongqi,
-        shui:getApp().globalData.shuiwei
+        shui:getApp().globalData.shuiwei,
+        light:getApp().globalData.light
       }
     })
     that.init(getApp().globalData.wendu)
@@ -83,21 +85,25 @@ Page({
 })
 function getOption(data){
   return {
+    // tooltip: {
+    //   trigger: 'axis',
+    // },
     tooltip: {
       trigger: 'axis',
+      confine:true//将此限制打开后tooltip将不再溢出
     },
-    dataZoom: [
-      {
-          type: 'slider',    //支持鼠标滚轮缩放
-          start: 0,            //默认数据初始缩放范围为10%到90%
-          end: 100
-      },
-      {
-          type: 'inside',    //支持单独的滑动条缩放
-          start: 0,            //默认数据初始缩放范围为10%到90%
-          end: 100
-      }
- ],
+//     dataZoom: [
+//       {
+//           type: 'slider',    //支持鼠标滚轮缩放
+//           start: 0,            //默认数据初始缩放范围为10%到90%
+//           end: 100
+//       },
+//       {
+//           type: 'inside',    //支持单独的滑动条缩放
+//           start: 0,            //默认数据初始缩放范围为10%到90%
+//           end: 100
+//       }
+//  ],
     xAxis: {
         type: 'category',
         // data: ['1:00', '3:00', '5:00', '7:00', '9:00', '11:00', '13:00','15:00','17:00','19:00','21:00','23:00']

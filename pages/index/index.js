@@ -15,7 +15,11 @@ Page({
       WaterTopic:'shui',
       AirTopic:'air',
       PlantTopic:'plant',
-      Plant1Topic:'shuibang'
+      Plant1Topic:'shuibang',
+      LightTopic:'light',
+      DevTopic:"LastWill",
+      Dev2Topic:"HomeWill",
+      Dev3Topic:"PlantWill"
     },
     value: {
       Humdlogo: './../images/humd1.png',
@@ -30,6 +34,11 @@ Page({
       appconfirm: 0,
       Plantlogo:'./../images/zhiwu.png',
       PlantValue:0,
+      LightLogo:'./../images/light.png',
+      LightValue:0,
+      DevValue:'',
+      Dev2Value:'',
+      Dev3Value:'',
       dead: 0,
       heal: 0,
       input:0,
@@ -328,51 +337,120 @@ Page({
         app.globalData.wendu.push(payload_string)
       }
       if (topic == that.data.topic.PlantTopic) {
-        if(payload_string>900){
-          // console.log(payload_string);
-          wx.showToast({
-            title: '土壤干燥',
-            icon: 'success',
-            image: '../images/danger.png',
-            duration: 1500,
-          })
+        
+        if(this.data.value.Dev3Value==''){
+          if(payload_string>900){
+            // console.log(payload_string);
+            wx.showToast({
+              title: '土壤干燥',
+              icon: 'success',
+              image: '../images/danger.png',
+              duration: 1500,
+            }),
+            that.setData({
+              'value.PlantValue':"干燥"
+            })
+          }else{
+            that.setData({
+              'value.PlantValue':"湿润"
+            })
+          }
         }
-        that.setData({
-          'value.PlantValue': payload_string
-        })
         app.globalData.turang.push(payload_string)
       }
       if (topic == that.data.topic.WaterTopic) {
-        if(payload_string<=0){
-          // console.log(payload_string);
-          wx.showToast({
-            title: '水位低',
-            icon: 'success',
-            image: '../images/danger.png',
-            duration: 1500,
-          })
-        }
-        that.setData({
-          'value.WaterValue': payload_string
-        })
+        if(this.data.value.DevValue==''){
+          if(payload_string<=0){ 
+            wx.showToast({
+              title: '水位低',
+              icon: 'success',
+              image: '../images/danger.png',
+              duration: 1500,
+            }),
+            that.setData({
+              'value.WaterValue': "缺水"
+            })
+          }else{
+            that.setData({
+              'value.WaterValue': "充足"
+            })
+          }
+      } 
         app.globalData.shuiwei.push(payload_string)
       }
       if (topic == that.data.topic.AirTopic) {
-        if(payload_string>700){
-          // console.log(payload_string);
-          wx.showToast({
-            title: '有害气体!',
-            icon: 'success',
-            image: '../images/danger.png',
-            duration: 1500,
-          })
-        }
-        
-        that.setData({
-          'value.AirValue': payload_string,
-        })
+        // 设备在线的时候
+          if(this.data.value.DevValue==''){
+            if(payload_string>700){
+              // console.log(payload_string);
+              wx.showToast({
+                title: '有害气体!',
+                icon: 'success',
+                image: '../images/danger.png',
+                duration: 1500,
+              })
+              ,
+              that.setData({
+                'value.AirValue': "有害",
+              })
+            }
+           }
+            that.setData({
+              'value.AirValue': "正常",
+            })
+         
         app.globalData.kongqi.push(payload_string)
 
+      }
+      if (topic == that.data.topic.LightTopic) {
+        if(payload_string<=180){
+          // console.log(payload_string);
+          that.setData({
+            'value.LightValue':"弱"
+          })
+        }else{
+          that.setData({
+            'value.LightValue':"强",
+          })
+        }
+      app.globalData.light.push(payload_string)
+
+      }
+      if (topic == that.data.topic.DevTopic) {
+        // console.log(payload_string)
+        if(payload_string=="OFFLINE"){
+          that.setData({
+            'value.DevValue':"设备离线",
+          })
+        }else{
+          that.setData({
+            'value.DevValue':"",
+          })
+        }
+      }
+      if (topic == that.data.topic.Dev2Topic) {
+        // console.log(payload_string)
+        if(payload_string=="OFFLINE"){
+          that.setData({
+            'value.Dev2Value':"设备离线",
+          })
+        }else{
+          that.setData({
+            'value.Dev2Value':"",
+          })
+        }
+      }
+      if (topic == that.data.topic.Dev3Topic) {
+        // console.log(payload_string)
+        if(payload_string=="OFFLINE"){
+          that.setData({
+            'value.Dev3Value':"设备离线",
+          })
+        }else{
+          that.setData({
+            'value.Dev3Value':"",
+          })
+        }
       }
 
   },
