@@ -1,4 +1,4 @@
-
+<view>
 <view wx:if="{{show=='success'}}">
 <view class="container">
 <view class="head">
@@ -55,14 +55,14 @@
     <view>
       <image src="{{value.Templogo}}" class='temp-logo'></image>
       <text>温度：{{value.TempValue}}°</text>
-      <view class="device">{{value.Dev2Value}}</view>
+      <view ><image class="device" src="{{value.Dev2Logo}}"></image></view>
     </view>
     </navigator>
     <navigator class='temp' url="/pages/echarts/echarts?type=income">
       <view>
         <image src="{{value.Humdlogo}}" class='temp-logo'></image>
         <text>湿度：{{value.HumdValue}}%</text>
-        <view class="device">{{value.Dev2Value}}</view>
+        <view ><image class="device" src="{{value.Dev2Logo}}"></image></view>
     </view>
     </navigator>
   </view>  
@@ -72,14 +72,14 @@
     <view >
       <image src="{{value.Airlogo}}" class='temp-logo'></image>
         <text>空气：{{value.AirValue}}</text>
-        <view class="device">{{value.Dev2Value}}</view>
+        <view ><image class="device" src="{{value.Dev2Logo}}"></image></view>
     </view>
     </navigator>
     <navigator  class='plant' url="/pages/echarts/echarts?type=turang">
     <view >
       <image src="{{value.Plantlogo}}" class='temp-logo'></image>
         <text>土壤：{{value.PlantValue}}</text>
-        <view class="device">{{value.Dev3Value}}</view>
+        <view ><image class="device" src="{{value.Dev3Logo}}"></image></view>
     </view>
     </navigator>
    
@@ -89,14 +89,14 @@
     <view>
       <image src="{{value.Waterlogo}}" class='temp-logo'></image>
       <text>水位：{{value.WaterValue}}</text> 
-      <view class="device">{{value.DevValue}}</view>
+      <view ><image class="device" src="{{value.Dev1Logo}}"></image></view>
     </view>
     </navigator>
     <navigator  class='light' url="/pages/echarts/echarts?type=light">
     <view>
       <image src="{{value.LightLogo}}" class='temp-logo'></image>
       <text>光照：{{value.LightValue}}</text> 
-      <view class="device">{{value.DevValue}}</view>
+      <view ><image class="device" src="{{value.Dev1Logo}}"></image></view>
     </view>
     </navigator>
   </view> 
@@ -191,4 +191,5 @@
 </view>
 </view> 
   
+</view>
 </view>

@@ -36,9 +36,10 @@ Page({
       PlantValue:0,
       LightLogo:'./../images/light.png',
       LightValue:0,
-      DevValue:'',
-      Dev2Value:'',
-      Dev3Value:'',
+      Dev1Logo:'',
+      Dev2Logo:'',
+      Dev3Logo:'',
+     
       dead: 0,
       heal: 0,
       input:0,
@@ -320,7 +321,6 @@ Page({
   
   MessageProcess: function(topic, payload) {
     var that = this;
-    // var arr = [];
     var payload_string = payload.toString();
       if (topic == that.data.topic.HumdTopic) {
        
@@ -328,7 +328,7 @@ Page({
           'value.HumdValue': payload_string
         })
         app.globalData.shidu.push(payload_string)
-        // console.log(app.globalData.wendu)
+
       }
       if (topic == that.data.topic.TempTopic) {
         that.setData({
@@ -338,7 +338,7 @@ Page({
       }
       if (topic == that.data.topic.PlantTopic) {
         
-        if(this.data.value.Dev3Value==''){
+        // console.log(payload_string);
           if(payload_string>900){
             // console.log(payload_string);
             wx.showToast({
@@ -355,11 +355,10 @@ Page({
               'value.PlantValue':"湿润"
             })
           }
-        }
         app.globalData.turang.push(payload_string)
       }
       if (topic == that.data.topic.WaterTopic) {
-        if(this.data.value.DevValue==''){
+      
           if(payload_string<=0){ 
             wx.showToast({
               title: '水位低',
@@ -375,12 +374,12 @@ Page({
               'value.WaterValue': "充足"
             })
           }
-      } 
+     
         app.globalData.shuiwei.push(payload_string)
       }
       if (topic == that.data.topic.AirTopic) {
         // 设备在线的时候
-          if(this.data.value.DevValue==''){
+          
             if(payload_string>700){
               // console.log(payload_string);
               wx.showToast({
@@ -394,7 +393,7 @@ Page({
                 'value.AirValue': "有害",
               })
             }
-           }
+           
             that.setData({
               'value.AirValue': "正常",
             })
@@ -417,38 +416,42 @@ Page({
 
       }
       if (topic == that.data.topic.DevTopic) {
-        // console.log(payload_string)
         if(payload_string=="OFFLINE"){
           that.setData({
-            'value.DevValue':"设备离线",
+            'value.Dev1Logo':"./../images/off.png",
+            
           })
         }else{
           that.setData({
-            'value.DevValue':"",
+            'value.Dev1Logo':"./../images/on.png",
+            
           })
         }
       }
       if (topic == that.data.topic.Dev2Topic) {
-        // console.log(payload_string)
         if(payload_string=="OFFLINE"){
           that.setData({
-            'value.Dev2Value':"设备离线",
+            'value.Dev2Logo':"./../images/off.png",
+            
           })
         }else{
           that.setData({
-            'value.Dev2Value':"",
+            'value.Dev2Logo':"./../images/on.png",
+            
           })
         }
       }
       if (topic == that.data.topic.Dev3Topic) {
-        // console.log(payload_string)
+ 
         if(payload_string=="OFFLINE"){
           that.setData({
-            'value.Dev3Value':"设备离线",
+            'value.Dev3Logo':"./../images/off.png",
+            
           })
         }else{
           that.setData({
-            'value.Dev3Value':"",
+            'value.Dev3Logo':"./../images/on.png",
+            
           })
         }
       }
@@ -457,7 +460,7 @@ Page({
 
   ConnectCallback: function(connack) {
     var that = this;
-    // console.log("connect callback ");
+
     for (var v in that.data.topic) {
       that.data.client.subscribe(that.data.topic[v], {
         qos: 1
@@ -478,12 +481,11 @@ Page({
   },
   //下拉刷新
   onPullDownRefresh: function () {
-    // wx.showNavigationBarLoading() 
-    //var that = this;
+
+
     this.weatherShow();
     this.yiqingData();
-    // this.onLoad();
-    // this.mqttClient();
+ 
   // 数据请求成功后，关闭刷新
   wx.stopPullDownRefresh({
     success (res) {
