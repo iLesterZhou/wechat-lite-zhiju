@@ -39,11 +39,7 @@ Page({
       Dev1Logo:'',
       Dev2Logo:'',
       Dev3Logo:'',
-     
-      dead: 0,
-      heal: 0,
-      input:0,
-      noSymptom:0,
+      WellKnown:''
     },
     LEDValue: [{
       LEDlogo: './../images/LED_gray.png',
@@ -87,8 +83,7 @@ Page({
    
     //加载天气
     this.weatherShow();
-    // //加载疫情信息
-    this.yiqingData();
+   
     // //加载mqtt
     this.mqttClient();
   },
@@ -164,26 +159,7 @@ Page({
       },
     })
   },
-  yiqingData: function() {
-    var that = this;
-    wx.request({
-      url: 'https://c.m.163.com/ug/api/wuhan/app/data/list-total',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      success: function (res) {
-      //  console.log(res.data.data.chinaTotal.total.confirm - );
-        that.setData({
-          "value.appconfirm": res.data.data.chinaTotal.total.confirm,
-          "value.dead": res.data.data.chinaTotal.total.dead,
-          "value.heal": res.data.data.chinaTotal.total.heal,
-          "value.input": res.data.data.chinaTotal.total.input,
-          "value.noSymptom": res.data.data.chinaTotal.extData.noSymptom,
-         
-        })
-      }
-    })
-  },
+  
 
   LedControl: function(e) {
     var that = this;
@@ -380,7 +356,7 @@ Page({
       if (topic == that.data.topic.AirTopic) {
         // 设备在线的时候
           
-            if(payload_string>700){
+            if(payload_string>800){
               // console.log(payload_string);
               wx.showToast({
                 title: '有害气体!',
@@ -392,11 +368,13 @@ Page({
               that.setData({
                 'value.AirValue': "有害",
               })
+            }else{
+              that.setData({
+                'value.AirValue': "正常",
+              })
             }
            
-            that.setData({
-              'value.AirValue': "正常",
-            })
+           
          
         app.globalData.kongqi.push(payload_string)
 
@@ -418,7 +396,7 @@ Page({
       if (topic == that.data.topic.DevTopic) {
         if(payload_string=="OFFLINE"){
           that.setData({
-            'value.Dev1Logo':"./../images/off.png",
+            'value.Dev1Logo':"./../images/off1.png",
             
           })
         }else{
@@ -431,7 +409,7 @@ Page({
       if (topic == that.data.topic.Dev2Topic) {
         if(payload_string=="OFFLINE"){
           that.setData({
-            'value.Dev2Logo':"./../images/off.png",
+            'value.Dev2Logo':"./../images/off1.png",
             
           })
         }else{
@@ -445,7 +423,7 @@ Page({
  
         if(payload_string=="OFFLINE"){
           that.setData({
-            'value.Dev3Logo':"./../images/off.png",
+            'value.Dev3Logo':"./../images/off1.png",
             
           })
         }else{
@@ -484,13 +462,37 @@ Page({
 
 
     this.weatherShow();
-    this.yiqingData();
+    
  
   // 数据请求成功后，关闭刷新
   wx.stopPullDownRefresh({
     success (res) {
         // console.log('刷新成功');
+        wx.showToast({
+          title: '刷新成功',
+          icon: 'none',
+          duration: 1000,
+        })
     }
   });
   },
+  // 上拉加载
+  onReachBottom:function(){
+    this.getWellKnown()
+  },
+  getWellKnown:function(){
+    let that = this
+    wx.request({
+      url: 'https://res.abeim.cn/api-text_yiyan', 
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success (res) {
+        that.setData({
+          "value.WellKnown":res.data.content
+        })
+        
+      }
+    })
+  }
 })

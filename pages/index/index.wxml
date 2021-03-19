@@ -1,6 +1,6 @@
 <view>
 <view wx:if="{{show=='success'}}">
-<view class="container">
+<view class="bigHead">
 <view class="head">
   <view class="left">
     <image src="{{value.Weatherlogo}}" class="weather"></image>
@@ -11,38 +11,23 @@
   </view>
   <view class="right">
     <navigator url="/pages/yiqing/yiqing">
-    <view class="right-header">
-      全国疫情数据(含港澳台)
+    <view class="notice">
+      <view class="noticeLogo">
+        <image src="./../images/notice1.png"></image>
+      </view>
+      <view class="noticeText">
+        戴口罩、勤洗手，少聚集、勤通风。    
+      </view>
+       
     </view>
-    <view class="right-body">
-      <view class="right-body1">
-        境外输入
-        <view class="right-body1-num1">{{value.input}}</view>
+    <view class="yiQing">
+      <view class="yiLogo">
+        <image src="./../images/right.png"></image>
       </view>
-      <view class="right-body1">
-        无症状者
-        <view class="right-body1-num2">{{value.noSymptom}}</view>
+      <view class="yiText">
+       查看全国疫情数据
       </view>
-      <view class="right-body1">
-        现有确诊
-        <view class="right-body1-num3">{{value.appconfirm-value.dead-value.heal}}</view>
-      </view>
-      
-    </view>
-    <view class="right-body">
-      <view class="right-body1">
-        累计确诊
-        <view class="right-body1-num4">{{value.appconfirm}}</view>
-      </view>
-      <view class="right-body1">
-        累计死亡
-        <view class="right-body1-num5">{{value.dead}}</view>
-      </view>
-      <view class="right-body1">
-        累计治愈
-        <view class="right-body1-num6">{{value.heal}}</view>
-      </view>
-      
+     
     </view>
   </navigator>
   </view> 
@@ -129,7 +114,37 @@
   </view>
 </view>
 </scroll-view>
-
+<view class="myDevices">
+  <view class="userLogo">
+      <image src="./../images/user.png"></image>
+  </view>
+  
+  <view class="userInfo">
+    <view class="userName">
+      lesterzhou
+    </view>
+    <view class="userNum">
+      2017105110228
+      <view class="userAut">
+        已认证
+      </view>
+   
+    </view>
+  
+    <view class="devNum">
+    4个智能设备
+    </view>
+   
+  </view>
+  <navigator class="userJump" url="/pages/userInfo/user">
+  <view class="userHome">
+      <image src="./../images/arrow.png"></image>
+  </view>
+  </navigator>
+</view>
+    <view class="wellKnown">
+      {{value.WellKnown}}
+    </view>
 </view>
 </view>
 <view wx:else>
@@ -144,38 +159,23 @@
   </view>
   <view class="right">
     <navigator url="/pages/yiqing/yiqing">
-    <view class="right-header">
-      全国疫情数据(含港澳台)
+    <view class="notice">
+      <view class="noticeLogo">
+        <image src="./../images/notice1.png"></image>
+      </view>
+      <view class="noticeText">
+        戴口罩、勤洗手，少聚集、勤通风。    
+      </view>
+       
     </view>
-    <view class="right-body">
-      <view class="right-body1">
-        境外输入
-        <view class="right-body1-num1">{{value.input}}</view>
+    <view class="yiQing">
+      <view class="yiLogo">
+        <image src="./../images/right.png"></image>
       </view>
-      <view class="right-body1">
-        无症状者
-        <view class="right-body1-num2">{{value.noSymptom}}</view>
+      <view class="yiText">
+       查看全国疫情数据
       </view>
-      <view class="right-body1">
-        现有确诊
-        <view class="right-body1-num3">{{value.appconfirm-value.dead-value.heal}}</view>
-      </view>
-      
-    </view>
-    <view class="right-body">
-      <view class="right-body1">
-        累计确诊
-        <view class="right-body1-num4">{{value.appconfirm}}</view>
-      </view>
-      <view class="right-body1">
-        累计死亡
-        <view class="right-body1-num5">{{value.dead}}</view>
-      </view>
-      <view class="right-body1">
-        累计治愈
-        <view class="right-body1-num6">{{value.heal}}</view>
-      </view>
-      
+     
     </view>
   </navigator>
   </view> 
@@ -188,6 +188,7 @@
   <view class="backText">
     登陆，解锁更多功能!
   </view>
+ 
 </view>
 </view> 
   

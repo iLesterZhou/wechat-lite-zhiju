@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/echarts/echarts",
     "pages/login/login",
-    "pages/yiqing/yiqing"
+    "pages/yiqing/yiqing",
+    "pages/userInfo/user"
   ],
   "window": {
     "backgroundTextStyle": "light",
