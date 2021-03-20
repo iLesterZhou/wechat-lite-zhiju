@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/echarts/echarts",
+    "pages/userLogin/userLogin",
     "pages/login/login",
     "pages/yiqing/yiqing",
     "pages/userInfo/user"
