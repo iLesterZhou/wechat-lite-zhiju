@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/echarts/echarts",
+    "pages/userInfo/userInfo",
     "pages/userLogin/userLogin",
-    "pages/login/login",
-    "pages/yiqing/yiqing",
-    "pages/userInfo/user"
+    "pages/echarts/echarts",
+    "pages/yiqing/yiqing"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -25,8 +25,8 @@
         "selectedIconPath": "./pages/images/home1.png"
       },
       {
-        "pagePath": "pages/login/login",
-        "text": "登录",
+        "pagePath": "pages/yiqing/yiqing",
+        "text": "用户",
         "iconPath": "./pages/images/login.png",
         "selectedIconPath": "./pages/images/login1.png"
       }

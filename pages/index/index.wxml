@@ -1,5 +1,4 @@
-<view>
-<view wx:if="{{show=='success'}}">
+
 <view class="bigHead">
 <view class="head">
   <view class="left">
@@ -10,7 +9,7 @@
     </view>
   </view>
   <view class="right">
-    <navigator url="/pages/yiqing/yiqing">
+    <navigator url="/pages/yiqing/yiqing" open-type="switchTab">
     <view class="notice">
       <view class="noticeLogo">
         <image src="./../images/notice1.png"></image>
@@ -85,7 +84,7 @@
     </view>
     </navigator>
   </view> 
-<scroll-view class="major" scroll-x>
+<scroll-view class="major" scroll-x wx:if="{{openid}}">
 <view class="led-control">
   <view class='led-container'>
     <image src="{{LEDValue[0].LEDlogo}}" class='led-logo'></image>
@@ -116,17 +115,17 @@
 </scroll-view>
 <view class="myDevices">
   <view class="userLogo">
-      <image src="./../images/user.png"></image>
+      <image src="{{imgUrl}}"></image>
   </view>
   
   <view class="userInfo">
     <view class="userName">
-      lesterzhou
+      {{nick}}
     </view>
     <view class="userNum">
-      2017105110228
+      <image src="{{userLogo}}"></image>
       <view class="userAut">
-        已认证
+        {{status}}
       </view>
    
     </view>
@@ -136,61 +135,21 @@
     </view>
    
   </view>
-  <navigator class="userJump" url="/pages/userInfo/user">
-  <view class="userHome">
-      <image src="./../images/arrow.png"></image>
+  
+  <view class="userHome" bindtap="clearSto"  wx:if="{{openid}}">
+      <image src="./../images/logout.png"></image>
+      
   </view>
-  </navigator>
+  
+  
+  
+  <view class="userHome" bindtap="toLogin"  wx:else>
+      <image src="./../images/denglu.png"></image> 
+  </view>
+  
 </view>
+
     <view class="wellKnown">
       {{value.WellKnown}}
     </view>
-</view>
-</view>
-<view wx:else>
-  <view class="container">
-  <view class="head">
-  <view class="left">
-    <image src="{{value.Weatherlogo}}" class="weather"></image>
-    <view>
-      <view class="zz-temp">{{WeatherValue.now.temperature}}°</view>
-      <view class="location">{{WeatherValue.location.name}} {{WeatherValue.now.text}}</view> 
-    </view>
-  </view>
-  <view class="right">
-    <navigator url="/pages/yiqing/yiqing">
-    <view class="notice">
-      <view class="noticeLogo">
-        <image src="./../images/notice1.png"></image>
-      </view>
-      <view class="noticeText">
-        戴口罩、勤洗手，少聚集、勤通风。    
-      </view>
-       
-    </view>
-    <view class="yiQing">
-      <view class="yiLogo">
-        <image src="./../images/right.png"></image>
-      </view>
-      <view class="yiText">
-       查看全国疫情数据
-      </view>
-     
-    </view>
-  </navigator>
-  </view> 
-
-</view>
-<view class="nologin">
-  <view class="backImg">
-    <image style="margin-left:20px;" mode="{{item.mode}}" src="{{'./../images/back.png'}}"></image>
-  </view>
-  <view class="backText">
-    登陆，解锁更多功能!
-  </view>
- 
-</view>
-</view> 
-  
-</view>
 </view>

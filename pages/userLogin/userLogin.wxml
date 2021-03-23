@@ -1,0 +1,30 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <block wx:if="{{canIUseOpenData}}" calss="userinfo-opendata">
+      <view class="userinfo-avatar" bindtap="bindViewTap">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <open-data type="userNickName"></open-data>
+      <view class="usermotto">
+        <button bindtap="bindViewTap" type="primary">微信用户一键登录</button>
+      </view>
+    </block>
+    <block wx:elif="{{!hasUserInfo}}">
+      <view>
+        <image src="./../images/back.png"></image>
+      </view>
+      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile" type="primary" > 获取头像昵称 </button>
+      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" type="primary"> 获取头像昵称 </button>
+      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
+    </block>
+    <block wx:else>
+      <image  class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+      <view class="usermotto">
+        <button bindtap="bindViewTap" type="primary">微信用户一键登录</button>
+      </view>
+    </block>
+  </view>
+ 
+</view>

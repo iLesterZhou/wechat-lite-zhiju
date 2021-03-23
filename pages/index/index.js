@@ -6,6 +6,11 @@
 const app = getApp();
 Page({
   data: {
+    nick:'',
+    imgUrl:'',
+    sex:'',
+    openid:'',
+    status:'已认证',
     show:'fail',
     client: null,
     topic: {
@@ -40,6 +45,12 @@ Page({
       Dev2Logo:'',
       Dev3Logo:'',
       WellKnown:''
+    },
+    user:{
+      nick:'',
+      imgUrl:'',
+      sex:'',
+      userLogo:'sss'
     },
     LEDValue: [{
       LEDlogo: './../images/LED_gray.png',
@@ -80,12 +91,39 @@ Page({
   },
 
   onLoad: function(options) {
-   
-    //加载天气
+  //  console.log("onLoad")
+
     this.weatherShow();
-   
     // //加载mqtt
     this.mqttClient();
+    let that = this
+    if(wx.getStorageSync('openid')){
+     var sex = wx.getStorageSync('sex')
+      that.setData({
+        "nick":wx.getStorageSync('nick'),
+        "imgUrl":wx.getStorageSync('imgUrl'),
+        "sex":sex,
+        "openid":wx.getStorageSync('openid')
+      })
+      if(sex=="man"){
+        that.setData({
+          "userLogo":'./../images/man.png'
+        })
+       
+      }else{
+        that.setData({
+          "userLogo":'./../images/women.png'
+        })
+      }
+    }else{
+     that.setData({
+      "imgUrl":"./../images/nologin.png",
+      "status":'未登录',
+      "nick":'游客',
+      "userLogo":'./../images/youke.png'
+     })
+    }
+    
   },
   mqttClient: function(){
     var that = this;
@@ -95,16 +133,11 @@ Page({
     that.data.client.on("error", that.ConnectError);
     that.data.client.on("reconnect", that.ClientReconnect);
     that.data.client.on("offline", that.ClientOffline);
-    //console.log(app.globalData.client_ID);
+    
   },
 
   onShow: function() {
-    let type = getApp().globalData.typeShow;
-    // console.log(type);
-    this.setData({
-      show:type
-    })
-    // console.log(this.data.show);
+  //  console.log("on show")
   },
 
   onHide: function() {
@@ -113,9 +146,12 @@ Page({
   },
 
   onUnload: function() {
-    console.log("on unload");
+    // console.log("on unload");
     var that = this;
     that.data.client.end();
+  },
+  onReady:function(){
+    // console.log("onready")
   },
   weatherShow: function() {
     var that = this;
@@ -494,5 +530,32 @@ Page({
         
       }
     })
+  },
+  clearSto:function(){
+    wx.showModal({
+      title: '提示',
+      content: '您确定要退出登录吗',
+      success: function (res) {
+        if (res.confirm) {//这里是点击了确定以后
+          wx.removeStorageSync('nick')
+          wx.removeStorageSync('imgUrl')
+          wx.removeStorageSync('sex')
+          wx.removeStorageSync('openid')
+          wx.removeStorageSync('session_key')
+          wx.reLaunch({
+            url: '/pages/index/index',//跳去首页
+          })
+        } else {//这里是点击了取消以后
+          console.log('用户点击取消')
+        }
+      }
+    })
+    
+  },
+  toLogin:function(){
+    wx.reLaunch({
+      url: '/pages/userLogin/userLogin',//跳去登录页
+    })
   }
+  
 })

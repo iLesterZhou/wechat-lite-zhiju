@@ -1,104 +1,84 @@
-// pages/userLogin/userLogin.js
+// index.js
+// 获取应用实例
+const app = getApp()
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    canIUseGetUserProfile: false,
+    //  wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName')
+    canIUseOpenData:false
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  // 事件处理函数
+  bindViewTap() {
+    let that = this
     wx.login({
-      success: function (res) {
-        var code = res.code;//发送给服务器的code
-        wx.getUserInfo({
-          success: function (res) {
-            var userNick = res.userInfo.nickName;//用户昵称
-            var avataUrl = res.userInfo.avatarUrl;//用户头像地址
-            var gender = res.userInfo.gender;//用户性别
-            if (code) {
-              wx.request({
-                url: 'http://localhost/test/getopenid.php',//服务器的地址，现在微信小程序只支持https请求，所以调试的时候请勾选不校监安全域名
-                data: {
-                  code: code,
-                  nick: userNick,
-                  avaurl: avataUrl,
-                  sex: gender,
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                success: function (res) {
-                  console.log(res.data);
-                  wx.setStorageSync('name', res.data.name);//将获取信息写入本地缓存
-                  wx.setStorageSync('openid', res.data.openid);
-                  wx.setStorageSync('imgUrl', res.data.imgurl);
-                  wx.setStorageSync('sex', res.data.sex);
-                }
+      success (res) {
+        if (res.code) {
+          wx.request({
+            url: 'https://www.ilesterzhou.top/phpApi/login/getopenid.php',
+            data: {
+              code: res.code,
+              nick:that.data.userInfo.nickName,
+              avaUrl:that.data.userInfo.avatarUrl,
+              gender:that.data.userInfo.gender
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success:function(res){
+              // console.log(res.data)
+              wx.setStorageSync('nick', res.data.nick)
+              wx.setStorageSync('openid',res.data.openid)
+              wx.setStorageSync('session_key',res.data.session_key)
+              wx.setStorageSync('imgUrl',res.data.imgUrl)
+              wx.setStorageSync('sex',res.data.sex)
+          
+              wx.switchTab({
+                url: '/pages/index/index',
               })
             }
-            else {
-              console.log("获取用户登录态失败！");
-            }
-          }
-        })
-      },
-      fail: function (error) {
-        console.log('login failed ' + error);
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
       }
-})    
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onLoad() {
+    // console.log(this.data.userInfo)
+    if (wx.getUserProfile) {
+      this.setData({
+        canIUseGetUserProfile: true
+      })
+     
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  getUserProfile(e) {
+    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
+    wx.getUserProfile({
+      desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        // console.log("test") 
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  getUserInfo(e) {
+    // 不推荐使用getUserInfo获取用户信息，预计自2021年4月13日起，getUserInfo将不再弹出弹窗，并直接返回匿名的用户个人信息
+    // console.log(e)
+    this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: false
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  onUnload: function() {
+    console.log("on unload");
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

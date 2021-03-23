@@ -1,0 +1,35 @@
+<view class="myDevices">
+  <view class="userLogo">
+      <image src="{{imgUrl}}"></image>
+  </view>
+  
+  <view class="userInfo">
+    <view class="userName">
+      {{nick}}
+    </view>
+    <view class="userNum">
+      <image src="{{userLogo}}"></image>
+      <view class="userAut">
+        {{status}}
+      </view>
+   
+    </view>
+  
+    <view class="devNum">
+    4个智能设备
+    </view>
+   
+  </view>
+  <navigator class="userJump" bindtap="clearSto"  wx:if="{{openid}}">
+  <view class="userHome">
+      <image src="./../images/logout.png"></image>
+      
+  </view>
+  
+  </navigator>
+  <navigator class="userJump" bindtap="toLogin"  wx:else>
+  <view class="userHome">
+      <image src="./../images/denglu.png"></image> 
+  </view>
+  </navigator>
+</view>

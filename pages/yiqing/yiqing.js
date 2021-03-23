@@ -37,7 +37,7 @@ Page({
       }
 
     })
-    that.getWebo()
+    
   },
   getWebo:function(){
     let that = this
@@ -71,5 +71,9 @@ Page({
         }
       });
   },
+  onShow:function(){
+    var that = this;
+    that.getWebo()
+  }
 })
 

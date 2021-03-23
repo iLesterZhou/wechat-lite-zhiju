@@ -21,7 +21,6 @@ App({
   globalData: {
     client_ID: randomString(10),
     client: mqtt.connect(host, options),
-    typeShow:'success',
     wendu:[],
     shidu:[],
     turang:[],
